@@ -1,5 +1,11 @@
-import { HDKComponent, HNode, Prefab, render } from '@hiber3d/hdk-react';
-import { InCircle } from '@hiber3d/hdk-react-components';
+import {
+  HDKComponent,
+  HNode,
+  Prefab,
+  render,
+  Animation,
+} from "@hiber3d/hdk-react";
+import { InCircle } from "@hiber3d/hdk-react-components";
 
 /**
  * Create a ground to stand on
@@ -19,7 +25,7 @@ const Ground = () => (
 /**
  * Add some water to the world. Here we use "CodeKitComponent" to pass through useful properties.
  */
-const Water: HDKComponent = props => (
+const Water: HDKComponent = (props) => (
   <HNode {...props}>
     <Prefab id="water_plane_01" scaleX={200} scaleZ={200}>
       <Prefab id="plane_01" y={-0.4} />
@@ -33,14 +39,12 @@ const Water: HDKComponent = props => (
  * a platform by rotating it 90 degrees without having to counter-rotate the animation.
  */
 const Platform = () => (
-  <HNode keyframeAnimated={{ loopBehaviour: 'REVERSE' }}>
-    <HNode keyframe={{ timestamp: 0 }} x={-6} y={-9} />
-    <HNode keyframe={{ timestamp: 4 }} x={0} y={0} />
+  <Animation animation={{ x: [-6, 0], y: [-9, 0], duration: 4 }}>
     <Prefab id="en_m_wooden_platform_01_wall" z={3} rotX={90} />
-  </HNode>
+  </Animation>
 );
 
-const Island: HDKComponent = props => (
+const Island: HDKComponent = (props) => (
   <Prefab id="smooth_rock_cylinder_02" {...props}>
     <Prefab id="fx_particlesystem_waterfall_01" x={-3.9} y={1.9} />
     <Prefab id="grass_tuft_02_cluster" x={-3} y={1.5} z={1} />
@@ -54,16 +58,23 @@ const Island: HDKComponent = props => (
 /**
  * Add a sign component. In addition to the normal props, it accepts some extra sign-related ones.
  */
-const Sign: HDKComponent<{ header: string; body: string; url: string }> = ({ header, body, url, ...props }) => (
+const Sign: HDKComponent<{ header: string; body: string; url: string }> = ({
+  header,
+  body,
+  url,
+  ...props
+}) => (
   <HNode {...props}>
     <Prefab
       id="sign_wooden_01_exclamtion"
       rotY={-80}
-      infoPanel={{
-        header,
-        body,
-        url,
-        isOpenInNewTabEnabled: true,
+      engineProps={{
+        infoPanel: {
+          header,
+          body,
+          url,
+          isOpenInNewTabEnabled: true,
+        },
       }}
     />
   </HNode>
@@ -78,7 +89,9 @@ const Wall = () => {
       faceCenter
       radius={90}
       items={10}
-      renderItem={() => <Prefab id="cliff_01_wall" rotY={90} scale={4} y={-10} />}
+      renderItem={() => (
+        <Prefab id="cliff_01_wall" rotY={90} scale={4} y={-10} />
+      )}
     />
   );
 };
@@ -86,7 +99,9 @@ const Wall = () => {
 /**
  * Add a spawn point with a custom material
  */
-const SpawnPoint: HDKComponent = props => <Prefab id="gpl_spawn_point_01" material="t_pearl_01" {...props} />;
+const SpawnPoint: HDKComponent = (props) => (
+  <Prefab id="gpl_spawn_point_01" material="t_pearl_01" {...props} />
+);
 
 /**
  * Create a world
@@ -95,7 +110,6 @@ const World = () => (
   <HNode y={-1}>
     <Ground />
     <Water y={-1} />
-    <Platform />
     <Island x={20} y={10} />
     <Sign
       header="Welcome to Hiber3D HDK!"
@@ -112,4 +126,4 @@ const World = () => (
 /**
  * Render the scene
  */
-render(<World />, { environment: 'sunrise_01' });
+render(<World />, { environment: "sunrise_01" });
