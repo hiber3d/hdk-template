@@ -4,6 +4,7 @@ import {
   Prefab,
   render,
   Animation,
+  InfoPanel,
 } from "@hiber3d/hdk-react";
 import { InCircle } from "@hiber3d/hdk-react-components";
 
@@ -59,25 +60,11 @@ const Island: HDKComponent = (props) => (
  * Add a sign component. In addition to the normal props, it accepts some extra sign-related ones.
  */
 const Sign: HDKComponent<{ header: string; body: string; url: string }> = ({
-  header,
-  body,
-  url,
   ...props
 }) => (
-  <HNode {...props}>
-    <Prefab
-      id="sign_wooden_01_exclamtion"
-      rotY={-80}
-      engineProps={{
-        infoPanel: {
-          header,
-          body,
-          url,
-          isOpenInNewTabEnabled: true,
-        },
-      }}
-    />
-  </HNode>
+  <InfoPanel {...props} openUrlInNewTab>
+    <Prefab id="sign_wooden_01_exclamtion" rotY={-80} />
+  </InfoPanel>
 );
 
 /**
