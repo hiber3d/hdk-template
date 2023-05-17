@@ -24,13 +24,12 @@ const Ground = () => (
 );
 
 /**
- * Add some water to the world. Here we use "CodeKitComponent" to pass through useful properties.
+ * Add some water to the world. Here we use "HDKComponent" to pass through useful properties.
  */
 const Water: HDKComponent = (props) => (
   <HNode {...props}>
-    <Prefab id="water_plane_01" scaleX={200} scaleZ={200}>
-      <Prefab id="plane_01" y={-0.4} />
-    </Prefab>
+    <Prefab id="water_plane_01" scaleX={200} scaleZ={200} />
+    <Prefab id="large_sand_plane_01" y={-0.4} />
   </HNode>
 );
 
