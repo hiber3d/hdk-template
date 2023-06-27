@@ -6,7 +6,7 @@ This is a Hiber3D Development Kit (HDK) project created using [create-hdk](https
 
 Please see [HDK Docs](https://developer.hiber3d.com/docs/) for full documentation.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/fork/hiber3d/hdk-template?file=index.tsx)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/fork/github/hiber3d/hdk-template?file=index.tsx)
 
 Install with this command:
 
